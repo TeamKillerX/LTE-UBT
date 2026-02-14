@@ -20,6 +20,7 @@
 
 import asyncio
 import logging
+from time import time
 import time as tme
 
 from pyrogram import *
@@ -27,6 +28,8 @@ from pyrogram.errors import AuthKeyDuplicated
 from userbot_auth import UserbotAuth
 
 from config import *
+
+StartTime = time()
 
 ubt = UserbotAuth(
     url="https://ubt.ryzenths.dpdns.org",
