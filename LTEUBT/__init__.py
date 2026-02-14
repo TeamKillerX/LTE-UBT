@@ -20,8 +20,8 @@
 
 import asyncio
 import logging
-from time import time
 import time as tme
+from time import time
 
 from pyrogram import *
 from pyrogram.errors import AuthKeyDuplicated
