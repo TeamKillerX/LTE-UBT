@@ -1,5 +1,5 @@
 import asyncio
-import time
+from time import time
 from datetime import datetime as dt
 
 from pyrogram import Client, filters
