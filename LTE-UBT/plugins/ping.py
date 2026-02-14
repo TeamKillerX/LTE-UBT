@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 
 @Client.on_message(
     ~filters.scheduled
-    & filters.command(["ping"])
+    & filters.command(["ping"], ["."])
     & filters.me
     & ~filters.forwarded
 )
