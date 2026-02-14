@@ -12,4 +12,4 @@ COPY . .
 
 RUN uv pip install --system --requirements requirements.lock
 
-CMD ["uv", "run", "python", "-m", "LTE-UBT"]
+CMD ["uv", "run", "python", "-m", "LTEUBT"]
