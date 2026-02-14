@@ -1,11 +1,9 @@
 from time import time
+
 from pyrogram import Client, filters
-from LTEUBT.sqlite._db import (
-    set_afk_in_db,
-    delete_afk_in_db,
-    get_afk
-    is_afk
-)
+
+from LTEUBT.sqlite._db import delete_afk_in_db, get_afk, is_afk, set_afk_in_db
+
 
 @Client.on_message(
     ~filters.scheduled
