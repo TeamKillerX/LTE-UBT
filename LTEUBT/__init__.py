@@ -26,6 +26,7 @@ from time import time
 from pyrogram import *
 from pyrogram.errors import AuthKeyDuplicated
 from userbot_auth import UserbotAuth
+from .sqlite._db import init_db
 
 from config import *
 
@@ -103,13 +104,20 @@ async def _startup_start():
         start_time = tme.perf_counter()
         lte_user = LteUBtUser()
 
+        async def init_database():
+            await init_db()
+            logging.info("Database initialized")
+
         async def start_user():
             try:
                 await lte_user.start()
             except AuthKeyDuplicated:
                 logging.error("Userbot AuthKeyDuplicated")
                 raise
-        await asyncio.gather(start_user())
+        await asyncio.gather(
+            init_database(),
+            start_user()
+        )
         end_time = tme.perf_counter()
         logging.info(f"[BENCHMARK SPEED] deployed in {end_time - start_time:.2f}s")
         await idle()
