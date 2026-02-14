@@ -28,7 +28,7 @@ from pyrogram.errors import AuthKeyDuplicated
 from userbot_auth import UserbotAuth
 
 from config import *
-
+from .route import web_server
 from .sqlite._db import init_db
 
 StartTime = time()
@@ -101,6 +101,7 @@ def main_core_run():
         asyncio.run(shutdown())
 
 async def _startup_start():
+    from aiohttp import web
     try:
         start_time = tme.perf_counter()
         lte_user = LteUBtUser()
@@ -108,6 +109,14 @@ async def _startup_start():
         async def init_database():
             await init_db()
             logging.info("Database initialized")
+
+        async def start_web():
+            if WEB_HEALTH_APP:
+                runner = web.AppRunner(await web_server())
+                await runner.setup()
+                await web.TCPSite(runner, "0.0.0.0", 8080).start()
+                logging.info("Web server started at http://0.0.0.0:8080")
+            logging.info("Web server default is disabled")
 
         async def start_user():
             try:
@@ -117,7 +126,8 @@ async def _startup_start():
                 raise
         await asyncio.gather(
             init_database(),
-            start_user()
+            start_user(),
+            start_web()
         )
         end_time = tme.perf_counter()
         logging.info(f"[BENCHMARK SPEED] deployed in {end_time - start_time:.2f}s")
