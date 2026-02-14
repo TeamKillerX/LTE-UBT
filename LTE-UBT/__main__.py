@@ -1,7 +1,4 @@
-from . import (
-   basis_config_enabled,
-   main_core_run
-)
+from . import basis_config_enabled, main_core_run
 
 basis_config_enabled()
 

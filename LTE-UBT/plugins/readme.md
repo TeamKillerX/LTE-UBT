@@ -42,7 +42,7 @@ async def ping_command(client: Client, message: Message):
 
 ```python
 @Client.on_message(
-    filters.command(["echo"], ["."]) 
+    filters.command(["echo"], ["."])
     & filters.me
 )
 async def echo_command(client: Client, message: Message):
