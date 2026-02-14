@@ -66,6 +66,33 @@ class LteUBtUser(Client):
         self.logger.info("Goodbye!")
         await asyncio.sleep(1)
 
+def basis_config_enabled():
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.FileHandler("lte.log", encoding="utf-8"),
+            logging.StreamHandler()
+        ]
+    )
+    logging.getLogger("asyncio").setLevel(logging.WARNING)
+    logging.getLogger("pyrogram").setLevel(logging.WARNING)
+
+async def shutdown():
+    logging.info("Shutting down Ryzenth...")
+    await asyncio.sleep(0.1)
+    logging.info("Shutdown complete.")
+
+def main_core_run():
+    try:
+        asyncio.run(fast_start())
+    except KeyboardInterrupt:
+        logging.info("KeyboardInterrupt received. Stopping Ryzenth...")
+        asyncio.run(shutdown())
+    except Exception as e:
+        logging.error(f"Fatal Error: {e}")
+        asyncio.run(shutdown())
+
 async def _startup_start():
     try:
         start_time = tme.perf_counter()
