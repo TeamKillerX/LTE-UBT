@@ -29,7 +29,7 @@ def get_readable_time(seconds: int) -> str:
 
 @Client.on_message(
     ~filters.scheduled
-    & filters.command(["ping"], ["."])
+    & filters.command("ping", prefixes=".")
     & filters.me
     & ~filters.forwarded
 )
