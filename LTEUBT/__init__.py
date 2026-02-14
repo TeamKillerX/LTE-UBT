@@ -112,12 +112,13 @@ async def _startup_start():
             logging.info("Database initialized")
 
         async def start_web():
-            if WEB_HEALTH_APP:
+            if WEB_HEALTH_APP == "true":
                 runner = web.AppRunner(await web_server())
                 await runner.setup()
                 await web.TCPSite(runner, "0.0.0.0", 8080).start()
                 logging.info("Web server started at http://0.0.0.0:8080")
-            logging.info("Web server default is disabled")
+            else:
+                logging.info("Web server default is disabled")
 
         async def start_user():
             try:
