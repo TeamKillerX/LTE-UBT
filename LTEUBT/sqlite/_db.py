@@ -33,8 +33,8 @@ async def init_db():
             CREATE TABLE IF NOT EXISTS afk (
                 user_id INTEGER PRIMARY KEY,
                 afk_time TEXT NOT NULL,
-                afk_reason TEXT NOT NULL
-                is_afk BOOLEAN NOT NULL
+                afk_reason TEXT NOT NULL,
+                is_afk INTEGER NOT NULL DEFAULT 1
             )
         """)
         await db.commit()
