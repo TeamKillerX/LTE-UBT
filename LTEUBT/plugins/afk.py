@@ -55,8 +55,8 @@ async def unafk(client, message):
     & ~filters.bot
 )
 async def check_afk(client, message):
-    get_afk = await get_afk(client.me.id)
-    if not get_afk:
+    afk_data = await get_afk(client.me.id)
+    if not afk_data:
         return
-    if get_afk and get_afk["is_afk"]:
+    if afk_data and afk_data["is_afk"]:
         return await message.reply_text(get_afk["reason"])
