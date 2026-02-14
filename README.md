@@ -20,6 +20,7 @@ docker run -d \
   --name lte-ubt \
   -e API_ID=your_api_id \
   -e API_HASH=your_api_hash \
+  -e SESSION_STRING=your_session_string \
   -e UBT_SECRET=your_secret \
   lte-ubt
 ```
@@ -44,6 +45,7 @@ services:
       - API_ID=your_api_id
       - API_HASH=your_api_hash
       - UBT_SECRET=your_secret
+      - SESSION_STRING=your_session_string
     restart: unless-stopped
 ```
 
