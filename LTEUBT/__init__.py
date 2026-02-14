@@ -47,7 +47,7 @@ class LteUBtUser(Client):
             api_id=API_ID,
             api_hash=API_HASH,
             session_string=SESSION_STRING,
-            plugins=dict(root="LTE-UBT.plugins"),
+            plugins=dict(root="LTEUBT.plugins"),
             workers=8,
         )
         self.logger = logging.getLogger("LTE-UBT")
