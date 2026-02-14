@@ -71,6 +71,24 @@ async def is_afk(user_id: int) -> bool:
         await cursor.close()
         return bool(row[0]) if row else False
 
+async def get_afk(user_id: int):
+    async with aiosqlite.connect(DB_PATH, timeout=10) as db:
+        cursor = await db.execute(
+            "SELECT is_afk, afk_reason, afk_time FROM afk WHERE user_id=?",
+            (user_id,)
+        )
+        row = await cursor.fetchone()
+        await cursor.close()
+
+        if not row:
+            return None
+
+        return {
+            "is_afk": bool(row[0]),
+            "reason": row[1],
+            "time": row[2]
+        }
+
 async def set_prefix_in_db(user_id: int, prefix: str):
     async with aiosqlite.connect(DB_PATH) as db:
         await db.execute('''
