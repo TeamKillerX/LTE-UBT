@@ -1,6 +1,11 @@
-from pyrogram import Client, filters
-from LTEUBT.sqlite._db import set_afk_in_db, delete_afk_in_db, is_afk
 from time import time
+from pyrogram import Client, filters
+from LTEUBT.sqlite._db import (
+    set_afk_in_db,
+    delete_afk_in_db,
+    get_afk
+    is_afk
+)
 
 @Client.on_message(
     ~filters.scheduled
@@ -38,7 +43,7 @@ async def afk(client, message):
     & ~filters.forwarded
 )
 async def unafk(client, message):
-    get_afk = await is_afk()
+    get_afk = await is_afk(client.me.id)
     if not get_afk:
         await message.reply_text("AFK mode is already disabled.")
         return
@@ -52,8 +57,8 @@ async def unafk(client, message):
     & ~filters.bot
 )
 async def check_afk(client, message):
-    get_afk = await is_afk()
+    get_afk = await get_afk(client.me.id)
     if not get_afk:
         return
-    if get_afk:
-        return await message.reply_text("Off AFK")
+    if get_afk and get_afk["is_afk"]:
+        return await message.reply_text(get_afk["reason"])
