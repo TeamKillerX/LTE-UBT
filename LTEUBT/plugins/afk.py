@@ -59,4 +59,4 @@ async def check_afk(client, message):
     if not afk_data:
         return
     if afk_data and afk_data["is_afk"]:
-        return await message.reply_text(get_afk["reason"])
+        return await message.reply_text(afk_data["reason"])
