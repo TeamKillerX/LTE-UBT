@@ -52,6 +52,15 @@ async def set_afk_in_db(user_id: int, afk_time: str, afk_reason: str, is_afk: bo
         await db.commit()
         return True
 
+async def delete_afk_in_db(user_id: int) -> bool:
+    async with aiosqlite.connect(DB_PATH, timeout=10) as db:
+        await db.execute(
+            "DELETE FROM afk WHERE user_id=?",
+            (user_id,)
+        )
+        await db.commit()
+    return True
+
 async def is_afk(user_id: int) -> bool:
     async with aiosqlite.connect(DB_PATH, timeout=10) as db:
         cursor = await db.execute(
