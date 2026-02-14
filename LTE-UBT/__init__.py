@@ -87,7 +87,7 @@ async def shutdown():
 
 def main_core_run():
     try:
-        asyncio.run(fast_start())
+        asyncio.run(_startup_start())
     except KeyboardInterrupt:
         logging.info("KeyboardInterrupt received. Stopping Ryzenth...")
         asyncio.run(shutdown())
