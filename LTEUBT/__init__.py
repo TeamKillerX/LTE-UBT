@@ -26,9 +26,10 @@ from time import time
 from pyrogram import *
 from pyrogram.errors import AuthKeyDuplicated
 from userbot_auth import UserbotAuth
-from .sqlite._db import init_db
 
 from config import *
+
+from .sqlite._db import init_db
 
 StartTime = time()
 
