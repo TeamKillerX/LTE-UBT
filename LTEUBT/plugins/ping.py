@@ -34,7 +34,7 @@ def get_readable_time(seconds: int) -> str:
     & ~filters.forwarded
 )
 async def ping(client, message):
-    uptime = readable_time((time() - StartTime))
+    uptime = get_readable_time((time() - StartTime))
     start = dt.now()
     _ = await message.reply_text("**Pong!!**")
     await asyncio.sleep(1.5)
