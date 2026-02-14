@@ -32,7 +32,7 @@ async def init_db():
         await db.execute("""
             CREATE TABLE IF NOT EXISTS afk (
                 user_id INTEGER PRIMARY KEY,
-                afk_time TEXT NOT NULL,
+                afk_time REAL NOT NULL,
                 afk_reason TEXT NOT NULL,
                 is_afk INTEGER NOT NULL DEFAULT 1
             )
