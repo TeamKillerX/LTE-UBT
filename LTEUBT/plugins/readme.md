@@ -15,7 +15,7 @@ import time
 
 @Client.on_message(
     ~filters.scheduled
-    & filters.command(["ping"], ["."])
+    & filters.command("ping", prefixes=".")
     & filters.me
     & ~filters.forwarded
 )
@@ -42,7 +42,7 @@ async def ping_command(client: Client, message: Message):
 
 ```python
 @Client.on_message(
-    filters.command(["echo"], ["."])
+    filters.command("echo", prefixes=".")
     & filters.me
 )
 async def echo_command(client: Client, message: Message):
@@ -56,7 +56,7 @@ async def echo_command(client: Client, message: Message):
 
 ```python
 @Client.on_message(
-    filters.command(["help"], ["."])
+    filters.command("help", prefixes=".")
     & filters.me
 )
 async def help_command(client: Client, message: Message):
